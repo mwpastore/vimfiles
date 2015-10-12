@@ -77,8 +77,7 @@ set ignorecase            " case-insensitive search
 set smartcase             " upper-case sensitive search
 set incsearch             " search as characters are entered
 set hlsearch              " highlight matches
-" clear search highlight with \<space>
-nnoremap <leader><space> :nohlsearch<CR>
+nnoremap <leader>/ :nohlsearch<CR> " clear highlighted search results
 "" }}}
 
 "" Folding {{{
