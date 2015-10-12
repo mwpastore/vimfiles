@@ -25,3 +25,6 @@
 [submodule "bundle/vim-hack"]
 	path = bundle/vim-hack
 	url = git://github.com/hhvm/vim-hack.git
+[submodule "bundle/indentLine"]
+	path = bundle/indentLine
+	url = git@github.com:Yggdroot/indentLine.git

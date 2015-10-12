@@ -1,8 +1,6 @@
 " This must be first, because it changes other options as side effect
 set nocompatible
 
-" vim:foldmethod=marker:foldlevel=0:
-
 "" Plugins {{{
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
@@ -29,13 +27,16 @@ set softtabstop=2
 set shiftwidth=2
 set colorcolumn=80
 set expandtab
+"let g:indentLine_char = '|'
 let g:indentLine_char = '·'
+"let g:indentLine_enabled = 0
+set listchars=tab:▸\ ,eol:¬
 "" }}}
 
 "" UI Config {{{
 set number
 set showcmd
-set cursorline
+"set cursorline
 filetype plugin indent on " load filetype-specific indent files
 set wildmenu              " visual autocomplete for command menu
 set lazyredraw            " redraw only when we need to
@@ -49,6 +50,8 @@ set title
 set hidden
 nnoremap <right> :bnext<cr>
 nnoremap <left> :bprevious<cr>
+nnoremap <up> :enew<cr>
+nnoremap <down> :bdelete<cr>
 nnoremap <S-right> <C-w>l
 nnoremap <S-left> <C-w>h
 nnoremap <S-up> <C-w>k
@@ -57,7 +60,7 @@ nnoremap <S-down> <C-w>j
 
 "" Airline {{{
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#fnamemod = ':t' " filename only
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'solarized'
 set laststatus=2
@@ -84,3 +87,5 @@ set foldlevelstart=10     " open most folds by default
 set foldnestmax=10        " 10 nested fold max
 set foldmethod=syntax     " fold based on indent level
 "" }}}
+
+" vim:foldmethod=marker:foldlevel=0:
