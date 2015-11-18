@@ -1,6 +1,9 @@
 " This must be first, because it changes other options as side effect
 set nocompatible
 
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+
 "" Plugins {{{
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
