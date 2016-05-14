@@ -3,6 +3,8 @@ set nocompatible
 
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
+set undofile
+set undodir=~/.vim/undo//
 
 "" Plugins {{{
 runtime bundle/vim-pathogen/autoload/pathogen.vim
