@@ -51,14 +51,20 @@ endif
 
 set title
 set hidden
-nnoremap <right> :bnext<cr>
-nnoremap <left> :bprevious<cr>
-nnoremap <up> :enew<cr>
-nnoremap <down> :bdelete<cr>
-nnoremap <S-right> <C-w>l
-nnoremap <S-left> <C-w>h
-nnoremap <S-up> <C-w>k
-nnoremap <S-down> <C-w>j
+nnoremap <c-h> :bprevious<cr>
+nnoremap <c-l> :bnext<cr>
+nnoremap <c-k> :enew<cr>
+nnoremap <c-j> :bdelete<cr>
+vnoremap y "+y
+nnoremap p "+p
+"nnoremap <left> :bprevious<cr>
+"nnoremap <right> :bnext<cr>
+"nnoremap <up> :enew<cr>
+"nnoremap <down> :bdelete<cr>
+"nnoremap <S-right> <C-w>l
+"nnoremap <S-left> <C-w>h
+"nnoremap <S-up> <C-w>k
+"nnoremap <S-down> <C-w>j
 "" }}}
 
 "" Airline {{{
