@@ -57,8 +57,8 @@ nnoremap <c-h> :bprevious<cr>
 nnoremap <c-l> :bnext<cr>
 nnoremap <c-k> :enew<cr>
 nnoremap <c-j> :bdelete<cr>
-vnoremap y "+y
-nnoremap p "+p
+"vnoremap <leader>y "+y
+"nnoremap <leader>p "+p
 "nnoremap <left> :bprevious<cr>
 "nnoremap <right> :bnext<cr>
 "nnoremap <up> :enew<cr>
