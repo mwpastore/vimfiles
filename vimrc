@@ -50,28 +50,14 @@ set matchpairs+=<:>       " match < and > as well
 if has('gui_running')
   set guifont=Meslo\ LG\ M\ DZ\ Regular\ for\ Powerline:h14
 endif
-
 set title
 set hidden
-nnoremap <c-h> :bprevious<cr>
-nnoremap <c-l> :bnext<cr>
-nnoremap <c-k> :enew<cr>
-nnoremap <c-j> :bdelete<cr>
-"vnoremap <leader>y "+y
-"nnoremap <leader>p "+p
-"nnoremap <left> :bprevious<cr>
-"nnoremap <right> :bnext<cr>
-"nnoremap <up> :enew<cr>
-"nnoremap <down> :bdelete<cr>
-"nnoremap <S-right> <C-w>l
-"nnoremap <S-left> <C-w>h
-"nnoremap <S-up> <C-w>k
-"nnoremap <S-down> <C-w>j
 "" }}}
 
 "" Airline {{{
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t' " filename only
+let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'solarized'
 set laststatus=2
@@ -95,7 +81,8 @@ nnoremap <leader>/ :nohlsearch<CR> " clear highlighted search results
 set foldenable            " enable folding
 set foldlevelstart=10     " open most folds by default
 set foldnestmax=10        " 10 nested fold max
-set foldmethod=syntax     " fold based on indent level
+"set foldmethod=syntax     " fold based on indent level
+set foldmethod=manual     " syntax is too expensive?
 "" }}}
 
 " vim:foldmethod=marker:foldlevel=0:
