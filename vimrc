@@ -11,6 +11,10 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 "" }}}
 
+let g:syntastic_javascript_checkers=['eslint']
+let g:syntastic_javascript_eslint_exe='$(yarn bin)/eslint'
+let g:sql_type_default = 'pgsql'
+
 "" Syntax highlighting {{{
 syntax enable
 set background=dark
