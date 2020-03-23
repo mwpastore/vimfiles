@@ -72,10 +72,17 @@
 	url = https://github.com/gcmt/taboo.vim.git
 [submodule "bundle/ale"]
 	path = bundle/ale
-	url = https://github.com/dense-analysis/ale.git
+	url = https://github.com/mwpastore/ale.git
+	branch = eslint-fixes
 [submodule "bundle/surround"]
 	path = bundle/surround
 	url = https://tpope.io/vim/surround.git
 [submodule "bundle/repeat"]
 	path = bundle/repeat
 	url = https://tpope.io/vim/repeat.git
+[submodule "bundle/vim-json"]
+	path = bundle/vim-json
+	url = https://github.com/elzr/vim-json.git
+[submodule "bundle/vim-swap"]
+	path = bundle/vim-swap
+	url = https://github.com/machakann/vim-swap.git
