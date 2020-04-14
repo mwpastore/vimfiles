@@ -80,14 +80,16 @@ let g:ale_list_window_size = 5
 let g:ale_sign_column_always = 1
 
 let g:ale_javascript_eslint_use_global = 1
-let g:ale_javascript_eslint_executable = systemlist('yarn global bin')[0].'/eslint_d'
+let g:ale_javascript_eslint_executable = 'eslint_d'
 let g:ale_javascript_eslint_options = '--cache --cache-location ~/.eslintcache/'
 
-let g:airline#extensions#ale#enabled = 1
+let g:ale_lint_on_text_changed = 'normal' " `always' (the default) is too slow!
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \}
+
+let g:airline#extensions#ale#enabled = 1
 
 let g:sql_type_default = 'pgsql'
 "" }}}
