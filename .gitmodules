@@ -86,3 +86,15 @@
 [submodule "bundle/vim-swap"]
 	path = bundle/vim-swap
 	url = https://github.com/machakann/vim-swap.git
+[submodule "bundle/vim-bracketed-paste"]
+	path = bundle/vim-bracketed-paste
+	url = https://github.com/ConradIrwin/vim-bracketed-paste
+[submodule "bundle/vim-togglebg"]
+	path = bundle/vim-togglebg
+	url = https://github.com/rakr/vim-togglebg.git
+[submodule "bundle/vim-indent-guides"]
+	path = bundle/vim-indent-guides
+	url = https://github.com/nathanaelkane/vim-indent-guides.git
+[submodule "bundle/vim-solarized8"]
+	path = bundle/vim-solarized8
+	url = https://github.com/lifepillar/vim-solarized8.git

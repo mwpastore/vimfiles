@@ -14,8 +14,15 @@ set path+=**
 set wildignore+=**/dist/**
 set wildignore+=**/node_modules/**
 set wildignore+=**/tmp/**
+set wildignore+=**/vendor/**
 
 let g:gutentags_cache_dir = '~/.vim/tags//'
+let g:gutentags_file_list_command = {
+\   'markers': {
+\       '.git': 'git ls-files',
+\   },
+\}
+let g:gutentags_ctags_executable_ruby = 'ripper-tags'
 
 set splitbelow
 set splitright
@@ -28,11 +35,11 @@ let NERDTreeMinimalUI = 1
 autocmd StdinReadPre * let s:std_in=1
 
 " Open NERDTree when started without arguments, or if the argument is a directory.
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == "" | NERDTree | endif
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') && v:this_session == '' | NERDTree | endif
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 " Automatically close NERDTree or the quickfix/location-list window if it's the last thing open.
-autocmd BufEnter * if (winnr("$") == 1 && (&buftype == "quickfix" || exists("b:NERDTree") && b:NERDTree.isTabTree())) | q | endif
+autocmd BufEnter * if (winnr('$') == 1 && (&buftype == 'quickfix' || exists('b:NERDTree') && b:NERDTree.isTabTree())) | q | endif
 
 "nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <silent> - :NERDTreeFind<CR>
@@ -47,33 +54,22 @@ execute pathogen#infect()
 "" }}}
 
 "" Syntax highlighting {{{
+
 syntax enable
-colorscheme solarized
+
 " autodetect from COLORFGBG environment variable
-set background&
+" TODO: This seems to happen automagically now?
+"set background&
+
+if $TERM_PROGRAM != 'Apple_Terminal'
+  set termguicolors
+endif
+colorscheme solarized8
 " Toggle between dark and light mode (yay)
-call togglebg#map("<F5>")
+call togglebg#map('<F5>')
 
-"let g:solarized_termcolors=256
-"let g:solarized_termtrans=0 " 0 | 1
-"let g:solarized_degrade=0 " 0 | 1
-"let g:solarized_bold = 1 | 0
-"let g:solarized_underline = 1 | 0
-"let g:solarized_italic = 1 | 0
-"let g:solarized_contrast='high' " normal | high or low
-"let g:solarized_visibility='high' " normal | high or low
-
-"let g:syntastic_check_on_open = 1
-
-"let g:syntastic_javascript_checkers = ['eslint']
-"let g:syntastic_javascript_eslint_exec = systemlist('yarn global bin')[0].'/eslint_d'
-"let g:syntastic_javascript_eslint_args = '--cache --cache-location ~/.eslintcache/'
-
-"let g:tsuquyomi_disable_quickfix = 1
-"let g:syntastic_typescript_checkers = ['tsuquyomi']
-
-"highlight SyntasticErrorSign ctermfg=3 ctermbg=7
-"highlight SyntasticWarningSign ctermfg=3 ctermbg=7
+let g:solarized_extra_hi_groups = 1
+let g:solarized_statusline = 'flat'
 
 let g:ale_open_list = 1
 let g:ale_list_window_size = 5
@@ -103,10 +99,11 @@ set expandtab
 let g:indentLine_char = '·'
 "let g:indentLine_char = '|'
 "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-"let g:indentLine_enabled = 0
+let g:indentLine_enabled = 0
 "let g:indentLine_setColors = 0
 "let g:indentLine_showFirstIndentLevel = 1
-let g:vim_json_syntax_conceal = 0
+"let g:vim_json_syntax_conceal = 0
+let g:indent_guides_start_level = 2
 set showbreak=↪
 set listchars=tab:▶—,eol:↲,nbsp:␣,space:·,extends:⟩,precedes:⟨
 "" }}}
@@ -115,10 +112,17 @@ set listchars=tab:▶—,eol:↲,nbsp:␣,space:·,extends:⟩,precedes:⟨
 set number
 set relativenumber
 set showcmd
-"set cursorline
 filetype plugin indent on " load filetype-specific indent files
 set wildmenu              " visual autocomplete for command menu
 set lazyredraw            " redraw only when we need to
+
+" Cursor
+au WinLeave * set nocursorline nocursorcolumn
+au WinEnter * set cursorline cursorcolumn
+let &t_SI .= "\<Esc>[5 q" "SI = INSERT mode
+let &t_SR .= "\<Esc>[4 q" "SR = REPLACE mode
+let &t_EI .= "\<Esc>[1 q" "EI = NORMAL mode (ELSE)
+set ttimeoutlen=25
 
 " Matching 💯
 set showmatch
@@ -132,7 +136,7 @@ if has('gui_running') && has('gui_macvim')
   set guioptions=
 endif
 
-set iconstring=%(%{TabooTabTitle(tabpagenr())}%)\ —\ %(tab\ %{tabpagenr()}\/%{tabpagenr(\"$\")}%)
+set iconstring=%(%{TabooTabTitle(tabpagenr())}%)\ —\ %(tab\ %{tabpagenr()}\/%{tabpagenr(\'$\')}%)
 set icon
 
 " TODO: Update Terminal.app's current working directory when we do a :cd in ViM.
@@ -200,8 +204,14 @@ let g:taboo_modified_tab_flag = '†'
 set updatetime=750
 " Always show the sign column, even when there are no signs.
 set signcolumn=yes
+" Let GitGutter use `Diff*' highlight groups (if any)
+" TODO: This makes the gutter weird in iTerm.app
+"let g:gitgutter_set_sign_backgrounds = 1
 " Let other plugins (i.e. linters) clobber GitGutter signs.
-let g:gitgutter_sign_priority=-10
+let g:gitgutter_sign_priority = -10
+" https://github.com/airblade/vim-gitgutter/issues/614
+" https://github.com/airblade/vim-gitgutter/commit/f458f43cf2f356fde1de85e2ec74ac2af774ffd4
+"highlight! link SignColumn LineNr
 "" }}}
 
 "" Searching {{{
