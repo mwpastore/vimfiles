@@ -110,15 +110,15 @@ set listchars=tab:▶—,eol:↲,nbsp:␣,space:·,extends:⟩,precedes:⟨
 
 "" UI Config {{{
 set number
-set relativenumber
-set showcmd
+augroup RelativeNumber
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal relativenumber
+  au WinLeave * setlocal norelativenumber
+augroup END
 filetype plugin indent on " load filetype-specific indent files
-set wildmenu              " visual autocomplete for command menu
 set lazyredraw            " redraw only when we need to
+set wildmenu              " visual autocomplete for command menu
 
-" Cursor
-au WinLeave * set nocursorline nocursorcolumn
-au WinEnter * set cursorline cursorcolumn
 let &t_SI .= "\<Esc>[5 q" "SI = INSERT mode
 let &t_SR .= "\<Esc>[4 q" "SR = REPLACE mode
 let &t_EI .= "\<Esc>[1 q" "EI = NORMAL mode (ELSE)
