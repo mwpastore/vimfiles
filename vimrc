@@ -117,8 +117,12 @@ set wildmenu              " visual autocomplete for command menu
 set lazyredraw            " redraw only when we need to
 
 " Cursor
-au WinLeave * set nocursorline nocursorcolumn
-au WinEnter * set cursorline cursorcolumn
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline cursorcolumn
+  au WinLeave * setlocal nocursorcolumn nocursorline
+augroup END
+
 let &t_SI .= "\<Esc>[5 q" "SI = INSERT mode
 let &t_SR .= "\<Esc>[4 q" "SR = REPLACE mode
 let &t_EI .= "\<Esc>[1 q" "EI = NORMAL mode (ELSE)
