@@ -55,18 +55,41 @@ execute pathogen#infect()
 
 "" Syntax highlighting {{{
 
-syntax enable
-
-" autodetect from COLORFGBG environment variable
-" TODO: This seems to happen automagically now?
-"set background&
-
 if $TERM_PROGRAM != 'Apple_Terminal'
   set termguicolors
 endif
-colorscheme solarized8
+
+" autodetect from COLORFGBG environment variable
+" TODO: This seems to happen automagically now?
+"set background=light
+if &background ==? 'light'
+  colorscheme solarized8_high
+else
+  colorscheme solarized8
+endif
+
 " Toggle between dark and light mode (yay)
-call togglebg#map('<F5>')
+"call togglebg#map('<F5>')
+
+function! Solar_Swap()
+  if &background ==? 'light'
+    set background=dark
+    colorscheme solarized8
+
+    silent !osascript -e 'tell app "System Events" to keystroke "d" using {shift down, option down, control down}'
+  else
+    set background=light
+    colorscheme solarized8_high
+
+    silent !osascript -e 'tell app "System Events" to keystroke "l" using {shift down, option down, control down}'
+  endif
+endfunction
+
+command! SolarSwap call Solar_Swap()
+
+syntax enable
+
+set mouse=a
 
 let g:solarized_extra_hi_groups = 1
 let g:solarized_statusline = 'flat'
@@ -110,18 +133,16 @@ set listchars=tab:▶—,eol:↲,nbsp:␣,space:·,extends:⟩,precedes:⟨
 
 "" UI Config {{{
 set number
-set relativenumber
-set showcmd
-filetype plugin indent on " load filetype-specific indent files
-set wildmenu              " visual autocomplete for command menu
-set lazyredraw            " redraw only when we need to
-
-" Cursor
-augroup CursorLine
+augroup RelativeNumber
   au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline cursorcolumn
-  au WinLeave * setlocal nocursorcolumn nocursorline
+  au VimEnter,WinEnter,BufWinEnter * setlocal relativenumber
+  au WinLeave * setlocal norelativenumber
 augroup END
+"set showcmd
+filetype plugin indent on " load filetype-specific indent files
+set lazyredraw            " redraw only when we need to
+set wildmenu              " visual autocomplete for command menu
+
 
 let &t_SI .= "\<Esc>[5 q" "SI = INSERT mode
 let &t_SR .= "\<Esc>[4 q" "SR = REPLACE mode
@@ -199,15 +220,15 @@ let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:taboo_tab_format = '⿹%U%m %r (%S)'
 let g:taboo_renamed_tab_format = '⿹%U%m •%l'
 " TODO: There has to be a better symbol to represent _blank_ or _new_.
-let g:taboo_unnamed_tab_label = 'Ϟ'
+let g:taboo_unnamed_tab_label = '♮'
 let g:taboo_modified_tab_flag = '†'
 """ }}}
 "" }}}
 
 "" GitGutter {{{
-set updatetime=750
 " Always show the sign column, even when there are no signs.
 set signcolumn=yes
+set updatetime=250
 " Let GitGutter use `Diff*' highlight groups (if any)
 " TODO: This makes the gutter weird in iTerm.app
 "let g:gitgutter_set_sign_backgrounds = 1
