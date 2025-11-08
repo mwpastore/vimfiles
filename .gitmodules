@@ -86,9 +86,6 @@
 [submodule "bundle/vim-bracketed-paste"]
 	path = bundle/vim-bracketed-paste
 	url = https://github.com/ConradIrwin/vim-bracketed-paste
-[submodule "bundle/vim-togglebg"]
-	path = bundle/vim-togglebg
-	url = https://github.com/rakr/vim-togglebg.git
 [submodule "bundle/vim-indent-guides"]
 	path = bundle/vim-indent-guides
 	url = https://github.com/nathanaelkane/vim-indent-guides.git
