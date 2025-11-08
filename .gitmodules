@@ -69,8 +69,8 @@
 	url = https://github.com/gcmt/taboo.vim.git
 [submodule "bundle/ale"]
 	path = bundle/ale
-	url = https://github.com/mwpastore/ale.git
-	branch = eslint-fixes
+	url = https://github.com/dense-analysis/ale.git
+	branch = master
 [submodule "bundle/surround"]
 	path = bundle/surround
 	url = https://tpope.io/vim/surround.git
